@@ -2,7 +2,7 @@
 
 namespace SnakeAndLadder
 {
-    class PlrWinPosition
+    class CountToWinGame
     {
         public const int NOPLAY = 0;
         public const int LADDER = 1;
@@ -10,6 +10,7 @@ namespace SnakeAndLadder
         static void Main(string[] args)
         {
             int position = 0;
+            int count = 0;
             Console.WriteLine("Game is played by single player");
             Console.WriteLine("Player Start Position is:" + position);
 
@@ -17,11 +18,8 @@ namespace SnakeAndLadder
             {
                 Random random = new Random();
                 int die = random.Next(1, 7);
-                Console.WriteLine("\nNumber Obtained on Die is:" + die);
-
                 Random randoms = new Random();
                 int option = randoms.Next(0, 3);
-                Console.WriteLine("Player Option Is:" + option);
 
                 if (option == NOPLAY)
                 {
@@ -30,21 +28,12 @@ namespace SnakeAndLadder
                 }
                 else if (option == LADDER)
                 {
+                    //count += 1;
                     Console.WriteLine("LADDER:" + LADDER);
-                    position = die + position;
+                    position = position + die;
                     Console.WriteLine("LADDER: Proceed With Ladder and Move Forward Upto " + position);
+                 //   Console.WriteLine("Total Count Win The Game" + count);
 
-                    if (position > 100)
-                    {
-                        Console.WriteLine("Throw Again Since The Position Exceeds 100");
-                        position = position - die;
-                    }
-                    else
-                    {
-                        position = 0;
-                        Console.WriteLine("\nExact Winning Position of 100 Is Reached");
-                        Console.WriteLine("\nGame Finished -> Start With New Position Again From " + position);
-                    }
                 }
 
                 else if (option == SNAKE)
@@ -53,8 +42,9 @@ namespace SnakeAndLadder
                     position = position - die;
                     Console.WriteLine("SNAKE: Bitten By Snake and Move Down upto " + position);
                 }
-                Console.ReadLine();
+                count++;
             }
+            Console.WriteLine("\nTotal Number Of Times The Dice Rolled To Win The Game" + count);
         }
     }
 }
